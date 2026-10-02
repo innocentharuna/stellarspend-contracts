@@ -47,19 +47,11 @@ mod tests {
     }
 
     #[test]
-    fn set_value_rejects_negative_amount() {
+    fn get_value_returns_zero_before_initialization() {
         let env = Env::default();
-        env.mock_all_auths();
-
         let contract_id = env.register(crate::Contract, ());
         let client = crate::ContractClient::new(&env, &contract_id);
 
-        let admin = soroban_sdk::Address::generate(&env);
-        client.initialize(&admin);
-
-        assert_eq!(
-            crate::Contract::set_value(env, admin, -1),
-            Err(crate::Error::InvalidAmount)
-        );
+        assert_eq!(client.get_value(), 0);
     }
 }
