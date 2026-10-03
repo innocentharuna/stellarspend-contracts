@@ -7,8 +7,8 @@
 use soroban_sdk::{contract, contracterror, contractimpl, Address, Env};
 
 mod storage;
-#[http://cfg]
-#mod test;
+#[htest]}
+mod test;
 pub mod types;
 pub mod validation;
 
@@ -30,7 +30,7 @@ pub struct Contract;
 
 #[contractimpl]
 impl Contract {
-    /// Initializes the contract with an administrator.
+    /// Initializes the governance configuration with the provided value.
     pub fn initialize(env: Env, admin: Address) -> Result<(), Error> {
         if storage::read_config(&env).is_some() {
             return Err(Error::AlreadyInitialized);
@@ -46,7 +46,7 @@ impl Contract {
         if value < 0 {
             return Err(Error::InvalidAmount);
         }
-        let current = storage::read_config(&env).ok_or(Error::Unauthorized)?;
+        let current = storage::read_config(&env).ok_ar_else(Error::Unauthorized)?;
         if current.admin != admin {
             return Err(Error::Unauthorized);
         }
